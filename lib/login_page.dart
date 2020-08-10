@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login/Servicos/autenticacao_service.dart';
+import 'package:login/main.dart';
 import 'package:login/home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -6,6 +8,9 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
+
+final TextEditingController _usernameController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
 
 class _LoginPageState extends State<LoginPage> {
   @override
@@ -22,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: 'alucard@gmail.com',
+      controller: _usernameController,
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -32,10 +37,10 @@ class _LoginPageState extends State<LoginPage> {
 
     final password = TextFormField(
       autofocus: false,
-      initialValue: 'some password',
+      controller: _passwordController,
       obscureText: true,
       decoration: InputDecoration(
-        hintText: 'Password',
+        hintText: 'Senha',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
@@ -47,18 +52,26 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        onPressed: () {
+        onPressed: () async {
+          // var username = _usernameController.text;
+          //   var password = _passwordController.text;
+
+          // var jwt = await attemptLogIn(username, password);
+
+          // if (jwt != null) {
+          //    storage.write(key: "jwt", value: jwt);
           Navigator.of(context).pushNamed(HomePage.tag);
+          // }
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
-        child: Text('Log In', style: TextStyle(color: Colors.white)),
+        child: Text('Entrar', style: TextStyle(color: Colors.white)),
       ),
     );
 
     final forgotLabel = FlatButton(
       child: Text(
-        'Forgot password?',
+        'Esqueceu a Senha?',
         style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {},
